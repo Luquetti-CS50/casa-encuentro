@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-script: "Caveat", cursive, sans-serif;
+
+  --color-canvas: #FAF7F2;
+  --color-canvas-subtle: #F4EFE6;
+  --color-canvas-border: #E8E0D2;
+
+  --color-forest: #2C3E2D;
+  --color-forest-deep: #1B2B1C;
+  --color-forest-leaf: #3D5A40;
+  --color-forest-soft: #4F6F52;
+
+  --color-sage: #6E8B68;
+  --color-sage-light: #8FA189;
+  --color-sage-tint: #DCE5D8;
+  --color-sage-mist: #F0F4EF;
+
+  --color-amber-gold: #C29352;
+  --color-amber-soft: #F9F2E7;
+  --color-terracotta: #D97D64;
+}
+
+@layer base {
+  html {
+    font-size: 100%;
+    transition: font-size 0.2s ease;
+  }
+
+  /* Escalas de accesibilidad para lectura cómoda (adultos mayores / baja visión) */
+  html[data-font-scale="large"] {
+    font-size: 109%;
+  }
+
+  html[data-font-scale="xlarge"] {
+    font-size: 118%;
+  }
+
+  /* Modo Alto Contraste Botánico (WCAG AAA) */
+  html[data-high-contrast="true"] {
+    --color-canvas: #FFFFFF;
+    --color-canvas-subtle: #F3EFE6;
+    --color-canvas-border: #8C7F6A;
+    --color-forest: #0F1D10;
+    --color-forest-deep: #071108;
+    --color-forest-leaf: #1E3820;
+  }
+
+  html[data-high-contrast="true"] body {
+    background-color: #FFFFFF;
+    color: #071108;
+  }
+
+  html[data-high-contrast="true"] .zen-card,
+  html[data-high-contrast="true"] input,
+  html[data-high-contrast="true"] select,
+  html[data-high-contrast="true"] textarea {
+    border-color: #2C3E2D !important;
+    border-width: 1.5px !important;
+  }
+
+  /* Modo Calma Visual / Sin Animaciones (Migrañas, vértigo o sensibilidad vestibular) */
+  html[data-reduced-motion="true"] *,
+  html[data-reduced-motion="true"] *::before,
+  html[data-reduced-motion="true"] *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-forest);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+  }
+
+  /* Asegurar tamaño táctil mínimo de 48px para accesibilidad universal */
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="reset"],
+  a.touch-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Estilización orgánica de selectores y controles nativos */
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%232C3E2D' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    background-size: 1.1rem;
+    padding-right: 2.6rem !important;
+    cursor: pointer;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #6B756B;
+    opacity: 0.75;
+  }
+
+  /* Scrollbars personalizados estilo Zen */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #F4EFE6;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #C8C0B0;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6E8B68;
+  }
+}
+
+/* Shimmer delicado para skeletons acorde a la directiva anti-spinner */
+@keyframes shimmerPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.skeleton-shimmer {
+  animation: shimmerPulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background-color: #EFE9DE;
+}
